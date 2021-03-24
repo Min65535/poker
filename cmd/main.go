@@ -11,10 +11,12 @@ import (
 func main() {
 	SevenWithGhost()
 }
+
+// 七张牌带鬼牌
 func SevenWithGhost() {
 	var dataAll model.DataJson
 	var errResults []model.Result
-	util.ReadFile("pkg/seven_cards_with_ghost.result.json", &dataAll)
+	util.ReadFile("./src/seven_cards_with_ghost.result.json", &dataAll)
 	startT := time.Now()
 	count := 0 // 对的
 	for _, data := range dataAll.Matches {
@@ -35,7 +37,7 @@ func SevenWithGhost() {
 	errDatas := model.DataJson{
 		Matches: errResults,
 	}
-	util.WriteFile("pkg/seven_cards_with_ghost_err.json", &errDatas)
+	util.WriteFile("./src/seven_cards_with_ghost_err.json", &errDatas)
 	rate := float64(count) / float64(len(dataAll.Matches)) * 100
 	fmt.Printf("比率是%f", rate)
 	fmt.Printf("耗时 = %v\n", tc)
@@ -45,7 +47,7 @@ func SevenWithGhost() {
 func Seven() {
 	var dataAll model.DataJson
 	var errResults []model.Result
-	util.ReadFile("pkg/seven_cards_with_ghost.json", &dataAll)
+	util.ReadFile("./src/seven_cards_with_ghost.json", &dataAll)
 	startT := time.Now()
 	count := 0 // 对的
 	for _, data := range dataAll.Matches {
@@ -66,7 +68,7 @@ func Seven() {
 	errDatas := model.DataJson{
 		Matches: errResults,
 	}
-	util.WriteFile("pkg/seven_cards_err.json", &errDatas)
+	util.WriteFile("./src/seven_cards_err.json", &errDatas)
 	rate := float64(count) / float64(len(dataAll.Matches)) * 100
 	fmt.Printf("比率是%f", rate)
 	fmt.Printf("耗时 = %v\n", tc)
@@ -77,8 +79,8 @@ func Five() {
 	var dataAll model.DataJson
 	var result model.DataJson
 	var errResults []model.Result
-	util.ReadFile("pkg/match.json", &dataAll)
-	util.ReadFile("pkg/match_result.json", &result)
+	util.ReadFile("./src/match.json", &dataAll)
+	util.ReadFile("./src/match_result.json", &result)
 	startT := time.Now()
 	count := 0 // 对的
 	for index, data := range dataAll.Matches {
@@ -101,7 +103,7 @@ func Five() {
 	errDatas := model.DataJson{
 		Matches: errResults,
 	}
-	util.WriteFile("pkg/match_err.json", &errDatas)
+	util.WriteFile("./src/match_err.json", &errDatas)
 	rate := float64(count) / float64(len(dataAll.Matches)) * 100
 	fmt.Printf("比率是%f", rate)
 	fmt.Printf("耗时 = %v\n", tc)
