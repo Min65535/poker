@@ -1,6 +1,8 @@
 package main
 
 import (
+	"TexasPoker/poker/util"
+	"TexasPoker/poker/woker"
 	"fmt"
 	"time"
 )
@@ -9,13 +11,13 @@ func main() {
 	SevenWithGhost()
 }
 func SevenWithGhost() {
-	var dataAll model.DataJson
-	var errResults []model.Result
-	util.ReadFile("pkg/seven_cards_with_ghost.result.json", &dataAll)
+	var dataAll DataJson
+	var errResults []Result
+	ReadFile("pkg/seven_cards_with_ghost.result.json", &dataAll)
 	startT := time.Now()
 	count := 0 // 对的
 	for _, data := range dataAll.Matches {
-		myResult := util.SevenPokerWithGhostCompare(data.Alice, data.Bob)
+		myResult := SevenPokerWithGhostCompare(data.Alice, data.Bob)
 		if myResult == data.Result {
 			count++
 		} else {
@@ -32,7 +34,7 @@ func SevenWithGhost() {
 	errDatas := DataJson{
 		Matches: errResults,
 	}
-	util.WriteFile("pkg/seven_cards_with_ghost_err.json", &errDatas)
+	WriteFile("pkg/seven_cards_with_ghost_err.json", &errDatas)
 	rate := float64(count) / float64(len(dataAll.Matches)) * 100
 	fmt.Printf("比率是%f", rate)
 	fmt.Printf("耗时 = %v\n", tc)
@@ -46,7 +48,7 @@ func Seven() {
 	startT := time.Now()
 	count := 0 // 对的
 	for _, data := range dataAll.Matches {
-		myResult := util.SevenPokerCompare(data.Alice, data.Bob)
+		myResult := woker.SevenPokerCompare(data.Alice, data.Bob)
 		if myResult == data.Result {
 			count++
 		} else {
@@ -79,9 +81,9 @@ func Five() {
 	startT := time.Now()
 	count := 0 // 对的
 	for index, data := range dataAll.Matches {
-		alicePriority := util.GetPriority(data.Alice)
-		bobPriority := util.GetPriority(data.Bob)
-		data.Result = util.PokerCompare(data.Alice, alicePriority, data.Bob, bobPriority)
+		alicePriority := woker.GetPriority(data.Alice)
+		bobPriority := woker.GetPriority(data.Bob)
+		data.Result = woker.PokerCompare(data.Alice, alicePriority, data.Bob, bobPriority)
 		if data.Result == result.Matches[index].Result {
 			count++
 		} else {

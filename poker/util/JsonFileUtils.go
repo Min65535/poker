@@ -1,13 +1,12 @@
 package util
 
 import (
-	"TexasPoker/pkg/model"
 	"encoding/json"
 	"fmt"
 	"os"
 )
 
-func ReadFile(filepath string, data *model.DataJson) {
+func ReadFile(filepath string, data *DataJson) {
 	filePtr, err := os.Open(filepath)
 	if err != nil {
 		fmt.Printf("Open json.file failed:%v\n", err)
@@ -23,7 +22,7 @@ func ReadFile(filepath string, data *model.DataJson) {
 	}
 }
 
-func WriteFile(filepath string, data *model.DataJson) {
+func WriteFile(filepath string, data *DataJson) {
 	filePtr, err := os.Create(filepath)
 	if err != nil {
 		fmt.Println("Create file failed", err.Error())
