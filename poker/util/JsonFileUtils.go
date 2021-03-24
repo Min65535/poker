@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"poker/pkg/model"
 )
 
-func ReadFile(filepath string, data *DataJson) {
+func ReadFile(filepath string, data *model.DataJson) {
 	filePtr, err := os.Open(filepath)
 	if err != nil {
 		fmt.Printf("Open json.file failed:%v\n", err)
@@ -22,7 +23,7 @@ func ReadFile(filepath string, data *DataJson) {
 	}
 }
 
-func WriteFile(filepath string, data *DataJson) {
+func WriteFile(filepath string, data *model.DataJson) {
 	filePtr, err := os.Create(filepath)
 	if err != nil {
 		fmt.Println("Create file failed", err.Error())
