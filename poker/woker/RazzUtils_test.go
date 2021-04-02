@@ -2,6 +2,8 @@ package woker
 
 import (
 	"fmt"
+	"poker/pkg/model"
+	"poker/poker/util"
 	"testing"
 	"time"
 )
@@ -111,8 +113,8 @@ func TestSevenPokerWithGhostCompare(t *testing.T) {
 }
 
 func SevenWithGhost() {
-	var dataAll DataJson
-	var errResults []Result
+	var dataAll model.DataJson
+	var errResults []model.Result
 	util.ReadFile("./src/seven_cards_with_ghost.result.json", &dataAll)
 	startT := time.Now()
 	count := 0 // 对的
@@ -121,7 +123,7 @@ func SevenWithGhost() {
 		if myResult == data.Result {
 			count++
 		} else {
-			errData := Result{
+			errData := model.Result{
 				Alice:       data.Alice,
 				Bob:         data.Bob,
 				Result:      data.Result,
@@ -131,7 +133,7 @@ func SevenWithGhost() {
 		}
 	}
 	tc := time.Since(startT) // 计算耗时
-	errDatas := DataJson{
+	errDatas := model.DataJson{
 		Matches: errResults,
 	}
 	util.WriteFile("pkg/seven_cards_with_ghost_err.json", &errDatas)

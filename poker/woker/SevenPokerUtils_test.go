@@ -2,6 +2,7 @@ package woker
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 )
 
@@ -52,4 +53,16 @@ func TestFindMaxPokerPriority(t *testing.T) {
 	maxPoker2, result2 := FindMaxPokerPriority(poker2)
 	fmt.Printf("\npoker1:%s,poker1:%s\n", poker1, poker2)
 	fmt.Printf("\nmaxPoker1:%s,Priority:%d,maxPoker2:%s,Priority:%d\n", maxPoker1, result1, maxPoker2, result2)
+}
+
+func TestSevenPokerCompare(t *testing.T) {
+	var poker = "12345678"
+	var builder strings.Builder
+	for i := 0; i < len(poker); i++ {
+		builder.WriteString(string(poker[i]) + "::")
+		if i == len(poker)-1 {
+			builder.WriteString("model.EarningsCacheRdsKey")
+		}
+	}
+	fmt.Println(builder.String())
 }
